@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
-  margin: 0;
+  margin
+  : 0;
   padding: 0;
 }
 
@@ -11,12 +12,7 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
-  background-image:
-    linear-gradient(to bottom,
-      #009688 0px,
-      #009688 15vh,
-      #dddbd1 15vh,
-      #d2dbdc 100%);
+  background-image: linear-gradient(to bottom, #009688 0px, #009688 15vh, #dddbd1 15vh, #d2dbdc 100%);
   font-family: 'Lato', sans-serif;
 }
 
@@ -209,7 +205,6 @@ body {
 }
 
 .left .contacts .contact.active {
-  border-bottom-color: transparent;
   background: #E9EBEB;
 }
 
@@ -246,7 +241,7 @@ body {
 .left .contacts .contact .contact-info small {
   color: #B6B9BB;
   margin-top: 10px;
-
+  
 }
 
 .right {
@@ -265,7 +260,6 @@ body {
   background-image: url('img/mine.jpg');
   overflow-y: scroll;
 }
-
 
 .right .right-messages .message {
   position: relative;
@@ -286,7 +280,8 @@ body {
 }
 
 .right .right-messages .message:hover .message-options,
-.right .right-messages .message .message-options.active {
+.right .right-messages
+.right-messages .message .message-options.active {
   display: block;
 }
 
@@ -332,7 +327,7 @@ body {
 }
 
 .right .right-messages .message.received {
-  background: white;
+  background: #fff;
   float: left;
   clear: both;
 }
@@ -368,3 +363,7 @@ body {
   font-size: 25px;
   color: #6B7376;
 }
+
+
+
+
