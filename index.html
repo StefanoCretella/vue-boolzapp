@@ -35,7 +35,7 @@
                 <label class="search-label" for="search">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </label>
-                <input id="contacts-filter" class="left-searchbar-input" placeholder="Cerca o inizia una nuova chat" name="search">
+                <input id="contacts-filter" class="left-searchbar-input" placeholder="Cerca o inizia una nuova chat" name="search" v-model="searchQuery">
             </div>
             <div class="contacts">
                 <div class="contact" v-for="contact in contactsWithLastMessage" :key="contact.name" @click="selectContact(contact)">

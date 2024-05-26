@@ -48,18 +48,23 @@ new Vue({
             },
         ],
         activeContact: null,
-        newMessageText: ''
+        newMessageText: '',
+        searchQuery: ''
     },
     computed: {
         contactsWithLastMessage() {
-            return this.contacts.map(contact => {
-                const lastMessage = contact.messages[contact.messages.length - 1];
-                return {
-                    ...contact,
-                    lastMessage: lastMessage.message,
-                    lastMessageTime: lastMessage.date
-                };
-            });
+            return this.contacts
+                .filter(contact => {
+                    return contact.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+                })
+                .map(contact => {
+                    const lastMessage = contact.messages[contact.messages.length - 1];
+                    return {
+                        ...contact,
+                        lastMessage: lastMessage.message,
+                        lastMessageTime: lastMessage.date
+                    };
+                });
         }
     },
     methods: {
@@ -87,4 +92,3 @@ new Vue({
         }
     }
 });
-
