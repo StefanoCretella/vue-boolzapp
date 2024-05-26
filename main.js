@@ -1,138 +1,80 @@
 new Vue({
     el: '#app',
     data: {
-        activeContact: {},
         contacts: [
             {
                 name: 'Michele',
-                avatar: 'img/avatar_1.jpg',
+                avatar: './img/avatar_1.jpg',
                 visible: true,
                 messages: [
                     {
-                        date: '10/01/2020 12:00',
-                        message: 'Ciao, come va?',
-                        status: 'received'
-                    },
-                    {
-                        date: '10/01/2020 12:01',
-                        message: 'Tutto bene, grazie!',
+                        date: '10/01/2020 15:30:55',
+                        message: 'Hai portato a spasso il cane?',
                         status: 'sent'
                     },
                     {
-                        date: '10/01/2020 12:02',
-                        message: 'Che fai oggi?',
-                        status: 'received'
-                    },
-                    {
-                        date: '10/01/2020 12:03',
-                        message: 'Niente di speciale, tu?',
+                        date: '10/01/2020 15:50:00',
+                        message: 'Ricordati di dargli da mangiare',
                         status: 'sent'
                     },
-                ]
+                    {
+                        date: '10/01/2020 16:15:22',
+                        message: 'Tutto fatto!',
+                        status: 'received'
+                    }
+                ],
             },
             {
                 name: 'Fabio',
-                avatar: 'img/avatar_2.jpg',
+                avatar: './img/avatar_2.jpg',
                 visible: true,
                 messages: [
                     {
-                        date: '10/01/2020 12:00',
-                        message: 'Ultimo messaggio inviato',
-                        status: 'received'
-                    }
-                ]
-            },
-            {
-                name: 'Samuele',
-                avatar: 'img/avatar_3.jpg',
-                visible: true,
-                messages: [
+                        date: '20/03/2020 16:30:00',
+                        message: 'Ciao come stai?',
+                        status: 'sent'
+                    },
                     {
-                        date: '10/01/2020 12:00',
-                        message: 'Ultimo messaggio inviato',
+                        date: '20/03/2020 16:30:55',
+                        message: 'Bene grazie! Stasera ci vediamo?',
                         status: 'received'
-                    }
-                ]
-            },
-            {
-                name: 'Alessandro B.',
-                avatar: 'img/avatar_4.jpg',
-                visible: true,
-                messages: [
+                    },
                     {
-                        date: '10/01/2020 12:00',
-                        message: 'Ultimo messaggio inviato',
-                        status: 'received'
+                        date: '20/03/2020 16:35:00',
+                        message: 'Mi piacerebbe ma devo andare a fare la spesa.',
+                        status: 'sent'
                     }
-                ]
+                ],
             },
-            {
-                name: 'Alessandro L.',
-                avatar: 'img/avatar_5.jpg',
-                visible: true,
-                messages: [
-                    {
-                        date: '10/01/2020 12:00',
-                        message: 'Ultimo messaggio inviato',
-                        status: 'received'
-                    }
-                ]
-            },
-            {
-                name: 'Claudia',
-                avatar: 'img/avatar_6.jpg',
-                visible: true,
-                messages: [
-                    {
-                        date: '10/01/2020 12:00',
-                        message: 'Ultimo messaggio inviato',
-                        status: 'received'
-                    }
-                ]
-            },
-            {
-                name: 'Federico',
-                avatar: 'img/avatar_7.jpg',
-                visible: true,
-                messages: [
-                    {
-                        date: '10/01/2020 12:00',
-                        message: 'Ultimo messaggio inviato',
-                        status: 'received'
-                    }
-                ]
-            },
-            {
-                name: 'Davide',
-                avatar: 'img/avatar_8.jpg',
-                visible: true,
-                messages: [
-                    {
-                        date: '10/01/2020 12:00',
-                        message: 'Ultimo messaggio inviato',
-                        status: 'received'
-                    }
-                ]
-            },
-           
-        ]
-    },
-    methods: {
-        selectContact(contact) {
-            this.activeContact = contact;
-        }
+        ],
+        activeContact: null,
     },
     computed: {
         contactsWithLastMessage() {
             return this.contacts.map(contact => {
                 const lastMessage = contact.messages[contact.messages.length - 1];
-                const lastMessageTime = new Date(lastMessage.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                 return {
                     ...contact,
                     lastMessage: lastMessage.message,
-                    lastMessageTime: lastMessageTime
+                    lastMessageTime: lastMessage.date
                 };
             });
+        }
+    },
+    methods: {
+        selectContact(contact) {
+            this.activeContact = contact;
+        },
+        sendMessage(event) {
+            if (this.activeContact && event.target.value.trim()) {
+                const newMessage = {
+                    date: new Date().toLocaleString(),
+                    message: event.target.value.trim(),
+                    status: 'sent'
+                };
+                this.activeContact.messages.push(newMessage);
+                event.target.value = '';
+            }
         }
     }
 });
