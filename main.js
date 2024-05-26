@@ -48,6 +48,7 @@ new Vue({
             },
         ],
         activeContact: null,
+        newMessageText: ''
     },
     computed: {
         contactsWithLastMessage() {
@@ -65,15 +66,23 @@ new Vue({
         selectContact(contact) {
             this.activeContact = contact;
         },
-        sendMessage(event) {
-            if (this.activeContact && event.target.value.trim()) {
+        sendMessage() {
+            if (this.activeContact && this.newMessageText.trim()) {
                 const newMessage = {
                     date: new Date().toLocaleString(),
-                    message: event.target.value.trim(),
+                    message: this.newMessageText.trim(),
                     status: 'sent'
                 };
                 this.activeContact.messages.push(newMessage);
-                event.target.value = '';
+                this.newMessageText = '';
+                setTimeout (() => {
+                    const responseMessage = {
+                        date: new Date().toLocaleString(),
+                        message: 'Ok',
+                        status: 'received' 
+                    };
+                    this.activeContact.messages.push(responseMessage);
+                }, 1000);
             }
         }
     }

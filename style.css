@@ -270,6 +270,9 @@ body {
 
 .right-messages-container .right-messages .message.received {
   margin-right: auto;
+  margin-right: auto;
+  background: #ffff; 
+  border-radius: 0px 10px 10px 10px;
 }
 
 .right-messages-container .right-messages .message span.message-time {
