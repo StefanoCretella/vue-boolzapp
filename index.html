@@ -10,18 +10,23 @@
 </head>
 <body>
     <div id="app" class="container">
+        <!-- Left panel -->
         <div class="left">
+            <!-- Left header -->
             <div class="header-left">
+                <!-- Left header logo -->
                 <div class="header-left-logo">
                     <img src="img/avatar_io.jpg" alt="Immagine profilo">
                     <span>Sofia</span>
                 </div>
+                <!-- Left header icons -->
                 <div class="header-left-icons">
                     <i class="fas fa-circle-notch"></i>
                     <i class="fas fa-comment-alt"></i>
                     <i class="fas fa-ellipsis-v"></i>
                 </div>
             </div>
+            <!-- Left disclaimer -->
             <div class="left-disclaimer">
                 <div class="left-disclaimer-logo">
                     <i class="fa fa-bell-slash" aria-hidden="true"></i>
@@ -31,12 +36,14 @@
                     <a href="#">Attiva notifiche desktop</a>
                 </div>
             </div>
+            <!-- Left search bar -->
             <div class="left-searchbar">
                 <label class="search-label" for="search">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </label>
                 <input id="contacts-filter" class="left-searchbar-input" placeholder="Cerca o inizia una nuova chat" name="search" v-model="searchQuery">
             </div>
+            <!-- Contacts list -->
             <div class="contacts">
                 <div class="contact" v-for="contact in contactsWithLastMessage" :key="contact.name" @click="selectContact(contact)">
                     <div class="contact-logo">
@@ -52,7 +59,9 @@
                 </div>
             </div>
         </div>
+        <!-- Right panel -->
         <div class="right">
+            <!-- Right header -->
             <div class="header-right" v-if="activeContact">
                 <div class="header-right-logo">
                     <img :src="activeContact.avatar" :alt="activeContact.name">
@@ -67,17 +76,34 @@
                     <i class="fas fa-ellipsis-v"></i>
                 </div>
             </div>
+            <!-- Messages display -->
             <div class="right-messages-container" v-if="activeContact">
                 <div class="right-messages">
-                    <div v-for="message in activeContact.messages" :key="message.date" class="message" :class="{ 'sent': message.status === 'sent', 'received': message.status === 'received'}">
-                        {{ message.message }}
-                        <span class="message-time">{{ message.date }}</span>
+                    <div v-for="(message, index) in activeContact.messages" :key="message.date" class="message" :class="{ 'sent': message.status === 'sent', 'received': message.status === 'received'}">
+                        <div class="message-content">
+                            {{ message.message }}
+                            <span class="message-time">{{ message.date }}</span>
+                        </div>
+                        <!-- Menu a tendina -->
+                        <div class="message-menu">
+                            <div class="dropdown">
+                                <button class="dropbtn" @click="showMessageMenu(index)">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="#" @click="deleteMessage(index)">Cancella messaggio</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            
+            
             <div v-else class="right-messages-container">
                 <p class="no-active-contact">Seleziona un contatto per iniziare a chattare</p>
             </div>
+            <!-- Message input -->
             <div class="right-footer" v-if="activeContact">
                 <div class="right-footer-icon f-left">
                     <i class="far fa-smile"></i>

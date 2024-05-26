@@ -49,7 +49,8 @@ new Vue({
         ],
         activeContact: null,
         newMessageText: '',
-        searchQuery: ''
+        searchQuery: '',
+        messageMenuIndex: -1
     },
     computed: {
         contactsWithLastMessage() {
@@ -89,6 +90,15 @@ new Vue({
                     this.activeContact.messages.push(responseMessage);
                 }, 1000);
             }
+        },
+        showMessageMenu(index) {
+            this.messageMenuIndex = index;
+        },
+        deleteMessage(index) {
+            if (confirm("Sei sicuro di voler cancellare questo messaggio?")) {
+                this.activeContact.messages.splice(index, 1);
+            }
+            this.messageMenuIndex = -1
         }
     }
 });
